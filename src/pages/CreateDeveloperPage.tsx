@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useCreateDeveloper, type Developer } from '../core/api/developers';
+import { useCreateDeveloper, } from '../core/api/developers';
 import { ResourceForm } from '../core/helpers/ResourceForm';
 import { useTranslation } from 'react-i18next';
 

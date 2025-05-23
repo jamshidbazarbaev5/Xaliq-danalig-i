@@ -1,8 +1,6 @@
 import { 
-  ShoppingBag,
   User2,
   List as ListView,
-  Ruler,
   Package,
   ArrowLeftRight,
   Menu,

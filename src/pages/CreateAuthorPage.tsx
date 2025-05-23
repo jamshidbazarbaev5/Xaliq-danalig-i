@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useCreateAuthor, type Author } from '../core/api/authors';
+import { useCreateAuthor, } from '../core/api/authors';
 import { ResourceForm } from '../core/helpers/ResourceForm';
 import { useTranslation } from 'react-i18next';
 
