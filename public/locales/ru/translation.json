@@ -1,0 +1,70 @@
+{
+  "common": {
+    "logout": "Выйти",
+    "sending": "Отправка...",
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "loading": "Загрузка...",
+    "signIn": "Войти",
+    "signingIn": "Вход...",
+    "username": "Имя пользователя",
+    "password": "Пароль"
+  },
+  "pages": {
+    "categories": {
+      "title": "Категории",
+      "createTitle": "Создать категорию",
+      "editTitle": "Редактировать категорию",
+      "addButton": "Добавить категорию",
+      "fields": {
+        "nameCyrillic": "Название (Кириллица)",
+        "nameLatin": "Название (Латиница)",
+        "descriptionCyrillic": "Описание (Кириллица)",
+        "descriptionLatin": "Описание (Латиница)",
+        "parentCategory": "Родительская категория"
+      }
+    },
+    "authors": {
+      "title": "Авторы",
+      "createTitle": "Создать автора",
+      "editTitle": "Редактировать автора",
+      "addButton": "Добавить автора",
+      "fields": {
+        "nameCyrillic": "Имя (Кириллица)",
+        "nameLatin": "Имя (Латиница)",
+        "biographyCyrillic": "Биография (Кириллица)",
+        "biographyLatin": "Биография (Латиница)",
+        "dateOfBirth": "Дата рождения",
+        "dateOfDeath": "Дата смерти",
+        "photo": "Фото"
+      }
+    },
+    "developers": {
+      "title": "Разработчики",
+      "createTitle": "Создать разработчика",
+      "editTitle": "Редактировать разработчика",
+      "addButton": "Добавить разработчика",
+      "fields": {
+        "name": "Имя",
+        "description": "Описание",
+        "photo": "Фото"
+      }
+    },
+    "login": {
+      "title": "Вход в систему",
+      "subtitle": "Войдите в свой аккаунт"
+    }
+  },
+  "navigation": {
+    "transfers": "Переводы",
+    "settings": "Настройки",
+    "categories": "Категории",
+    "authors": "Авторы",
+    "developers": "Разработчики"
+  },
+  "deleteConfirmation": {
+    "title": "Подтверждение удаления",
+    "message": "Вы уверены, что хотите удалить этот элемент? Это действие нельзя отменить."
+  }
+}

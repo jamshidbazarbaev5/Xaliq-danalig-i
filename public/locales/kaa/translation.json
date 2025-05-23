@@ -1,0 +1,70 @@
+{
+  "common": {
+    "logout": "Шығыў",
+    "sending": "Жиберилмекте...",
+    "submit": "Жибериў",
+    "cancel": "Бийкарлаў",
+    "delete": "Өшириў",
+    "loading": "Жүклеў...",
+    "signIn": "Кириў",
+    "signingIn": "Кириў...",
+    "username": "Пайдаланыўшы аты",
+    "password": "Парол"
+  },
+  "pages": {
+    "categories": {
+      "title": "Категориялар",
+      "createTitle": "Категория жаратыў",
+      "editTitle": "Категорияны өзгертиў",
+      "addButton": "Категория қосыў",
+      "fields": {
+        "nameCyrillic": "Аты (Кирилл)",
+        "nameLatin": "Аты (Латын)",
+        "descriptionCyrillic": "Тәрийп (Кирилл)",
+        "descriptionLatin": "Тәрийп (Латын)",
+        "parentCategory": "Тийкарғы категория"
+      }
+    },
+    "authors": {
+      "title": "Авторлар",
+      "createTitle": "Автор жаратыў",
+      "editTitle": "Авторды өзгертиў",
+      "addButton": "Автор қосыў",
+      "fields": {
+        "nameCyrillic": "Аты (Кирилл)",
+        "nameLatin": "Аты (Латын)",
+        "biographyCyrillic": "Биография (Кирилл)",
+        "biographyLatin": "Биография (Латын)",
+        "dateOfBirth": "Туўылған сәнеси",
+        "dateOfDeath": "Қайтыс болған сәнеси",
+        "photo": "Фото"
+      }
+    },
+    "developers": {
+      "title": "Программистлер",
+      "createTitle": "Программист жаратыў",
+      "editTitle": "Программистти өзгертиў",
+      "addButton": "Программист қосыў",
+      "fields": {
+        "name": "Аты",
+        "description": "Тәрийп",
+        "photo": "Фото"
+      }
+    },
+    "login": {
+      "title": "Системаға кириў",
+      "subtitle": "Өз аккаунтыңызға кириңиз"
+    }
+  },
+  "navigation": {
+    "transfers": "Аўдармалар",
+    "settings": "Сазламалар",
+    "categories": "Категориялар",
+    "authors": "Авторлар",
+    "developers": "Программистлер"
+  },
+  "deleteConfirmation": {
+    "title": "Өшириўди тастыйықлаў",
+    "message": "Бул элементти өширмекшимисиз? Бул ҳәрекетти қайтарып болмайды."
+  }
+}
