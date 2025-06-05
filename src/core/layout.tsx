@@ -6,6 +6,7 @@ import {
   Menu,
   X,
   UserCheck,
+  Book,
 } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
@@ -58,6 +59,7 @@ export default function Layout({ children }: any) {
         
         { icon: User2, label: t('navigation.authors'), href: '/authors' },
         { icon: UserCheck, label: t('navigation.developers'), href: '/developers' },
+          { icon: Book, label: t('navigation.books'), href: '/books' },
       ]
     },
   ];

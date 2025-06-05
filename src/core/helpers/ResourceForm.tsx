@@ -22,12 +22,13 @@ export interface FormField {
   placeholder?: string;
   options?: { value: string | number; label: string }[];
   required?: boolean;
-  // validation?: (schema: z.ZodTypeAny) => z.ZodTypeAny;
   readOnly?: boolean;
   imageUrl?: string;
   preview?: string;
-  existingImage?: string;  // Add this new field
-  onDeleteImage?: (imageId?: number) => void; // Function to handle image deletion
+  existingImage?: string;
+  existingFile?: string;  // For non-image files like epub
+  existingFileName?: string;  // To display the filename of existing file
+  onDeleteImage?: (imageId?: number) => void;
   existingImages?: Array<{ id?: number; url: string }>;
   // For searchable-select
   searchTerm?: string;
@@ -35,7 +36,8 @@ export interface FormField {
   showCreateButton?: boolean;
   onCreateClick?: () => void;
   defaultValue?: any;
-  onChange?: (value: any) => void; // Add onChange handler for select fields
+  onChange?: (value: any) => void;
+  accept?: string;  // For specifying accepted file types
 }
 
 // Update the ResourceFormProps interface to be more specific about generic type T
@@ -60,7 +62,6 @@ export function ResourceForm<T extends Record<string, any>>({
   children,
   form: providedForm,
 }: ResourceFormProps<T>) {
-  // Transform defaultValues to handle nested fields
   const transformedDefaultValues = fields.reduce((acc, field) => {
     if (field.name.includes('.')) {
       const [parent, child] = field.name.split('.');
@@ -79,7 +80,6 @@ export function ResourceForm<T extends Record<string, any>>({
   });
 
   const handleSubmit = (data: any) => {
-    // Transform form data back to the expected structure
     const transformedData = Object.entries(data).reduce((acc, [key, value]) => {
       if (typeof value === 'object' && value !== null && !(value instanceof File)) {
         acc[key] = value;
@@ -159,7 +159,6 @@ export function ResourceForm<T extends Record<string, any>>({
                             <SelectValue placeholder={field.placeholder} />
                           </SelectTrigger>
                           <SelectContent onPointerDownOutside={(e) => {
-                            // Prevent dropdown from closing when clicking inside it
                             const target = e.target as Node;
                             const selectContent = document.querySelector('.select-content-wrapper');
                             if (selectContent && selectContent.contains(target)) {
@@ -172,7 +171,6 @@ export function ResourceForm<T extends Record<string, any>>({
                                 placeholder={`Search ${field.label.toLowerCase()}...`}
                                 value={field.searchTerm || ''}
                                 onChange={(e) => {
-                                  // Prevent closing dropdown when typing
                                   e.stopPropagation();
                                   field.onSearch && field.onSearch(e.target.value);
                                 }}
@@ -216,13 +214,25 @@ export function ResourceForm<T extends Record<string, any>>({
                         </Select>
                       ) : field.type === 'file' ? (
                         <div className="space-y-2">
-                          {(field.preview || field.existingImage) && (
+                          {field.existingImage && (
                             <div className="mb-2">
                               <img 
-                                src={field.preview || field.existingImage} 
+                                src={field.existingImage} 
                                 alt={field.label} 
                                 className="h-20 w-20 object-cover rounded-md"
                               />
+                            </div>
+                          )}
+                          {field.existingFile && (
+                            <div className="mb-2 flex items-center gap-2">
+                              <a 
+                                href={field.existingFile} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:underline flex items-center gap-1"
+                              >
+                                {field.existingFileName || 'View current file'}
+                              </a>
                             </div>
                           )}
                           <Input
@@ -233,8 +243,8 @@ export function ResourceForm<T extends Record<string, any>>({
                                 setValue(field.name, file);
                               }
                             }}
-                            required={field.required && !field.existingImage}
-                            accept="image/*"
+                            required={field.required && !field.existingImage && !field.existingFile}
+                            accept={field.accept || "image/*"}
                           />
                         </div>
                       ) : field.type === 'multiple-files' ? (

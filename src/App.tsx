@@ -5,15 +5,18 @@ import LoginPage from './pages/LoginPage';
 import CategoriesPage from './pages/CategoriesPage';
 import AuthorsPage from './pages/AuthorsPage';
 import DevelopersPage from './pages/DevelopersPage';
+import BooksPage from './pages/BooksPage';
 import { isAuthenticated } from './core/api/auth';
 import './App.css';
 import { LanguageProvider } from './core/context/LanguageContext';
 import CreateCategoryPage from './pages/CreateCategoryPage';
 import CreateAuthorPage from './pages/CreateAuthorPage';
 import CreateDeveloperPage from './pages/CreateDeveloperPage';
+import CreateBookPage from './pages/CreateBookPage';
 import EditCategoryPage from './pages/EditCategoryPage';
 import EditAuthorPage from './pages/EditAuthorPage';
 import EditDeveloperPage from './pages/EditDeveloperPage';
+import EditBookPage from './pages/EditBookPage';
 
 const queryClient = new QueryClient();
 
@@ -37,12 +40,15 @@ function App() {
                     <Route path="/categories" element={<CategoriesPage />} />
                     <Route path="/authors" element={<AuthorsPage />} />
                     <Route path="/developers" element={<DevelopersPage  />} />
+                    <Route path="/books" element={<BooksPage />} />
                     <Route path="/categories/create" element={<CreateCategoryPage />} />
                     <Route path="/authors/create" element={<CreateAuthorPage />} />
                     <Route path="/developers/create" element={<CreateDeveloperPage />} />
+                    <Route path="/books/create" element={<CreateBookPage />} />
                     <Route path="/categories/:id" element={<EditCategoryPage />} />
                     <Route path="/authors/edit/:id" element={<EditAuthorPage />} />
                     <Route path="/developers/edit/:id" element={<EditDeveloperPage />} />
+                    <Route path="/books/edit/:id" element={<EditBookPage />} />
                     <Route path="/" element={<Navigate to="/categories" />} />
                   </Routes>
                 </Layout>

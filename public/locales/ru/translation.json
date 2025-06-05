@@ -9,7 +9,16 @@
     "signIn": "Войти",
     "signingIn": "Вход...",
     "username": "Имя пользователя",
-    "password": "Пароль"
+    "password": "Пароль",
+    "active": "Активный",
+    "inactive": "Неактивный"
+  },
+  "placeholders": {
+    "search": "Поиск...",
+    "select": "Выберите...",
+    "selectCategory": "Выберите категорию",
+    "selectAuthor": "Выберите автора",
+    "selectDeveloper": "Выберите разработчика"
   },
   "pages": {
     "categories": {
@@ -54,6 +63,31 @@
     "login": {
       "title": "Вход в систему",
       "subtitle": "Войдите в свой аккаунт"
+    },
+    "books": {
+      "title": "Книги",
+      "createTitle": "Создать книгу",
+      "editTitle": "Редактировать книгу",
+      "addButton": "Добавить книгу",
+      "fields": {
+        "epubFileCyrillic": "Файл EPUB (Кириллица)",
+        "epubFileLatin": "Файл EPUB (Латиница)",
+        "isbn": "ISBN",
+        "titleCyrillic": "Название (Кириллица)",
+        "titleLatin": "Название (Латиница)",
+        "descriptionCyrillic": "Описание (Кириллица)",
+        "descriptionLatin": "Описание (Латиница)",
+        "publicationYear": "Год публикации",
+        "publisher": "Издатель",
+        "status": "Статус",
+        "order": "Порядок",
+        
+        "coverImage": "Обложка",
+        "epubFileCyr": "Файл EPUB (Кириллица)",
+        "epubFileLat": "Файл EPUB (Латиница)",
+        "authors": "Авторы",
+        "categories": "Категории"
+      }
     }
   },
   "navigation": {
@@ -61,6 +95,7 @@
     "settings": "Настройки",
     "categories": "Категории",
     "authors": "Авторы",
+    "books": "Книги",
     "developers": "Разработчики"
   },
   "deleteConfirmation": {

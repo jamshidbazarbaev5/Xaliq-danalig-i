@@ -9,7 +9,16 @@
     "signIn": "Кириў",
     "signingIn": "Кириў...",
     "username": "Пайдаланыўшы аты",
-    "password": "Парол"
+    "password": "Парол",
+    "active": "Активли",
+    "inactive": "Активли емес"
+  },
+  "placeholders": {
+    "search": "Ізлеў...",
+    "select": "Таңлаңыз...",
+    "selectCategory": "Категорияны таңлаңыз",
+    "selectAuthor": "Авторды таңлаңыз",
+    "selectDeveloper": "Программистті таңлаңыз"
   },
   "pages": {
     "categories": {
@@ -54,6 +63,27 @@
     "login": {
       "title": "Системаға кириў",
       "subtitle": "Өз аккаунтыңызға кириңиз"
+    },
+    "books": {
+      "title": "Китаплар",
+      "createTitle": "Китап жаратыў",
+      "editTitle": "Китапты өзгертиў",
+      "addButton": "Китап қосыў",
+      "fields": {
+        "titleCyrillic": "Аты (Кирилл)",
+        "titleLatin": "Аты (Латын)",
+        "descriptionCyrillic": "Тәрийп (Кирилл)",
+        "descriptionLatin": "Тәрийп (Латын)",
+        "publicationYear": "Баспадан шыққан жылы",
+        "publisher": "Баспахана",
+        "status": "Ҳалаты",
+        "order": "Тәртип",
+        "coverImage": "Сүўрети",
+        "epubFileCyr": "EPUB файлы (Кирилл)",
+        "epubFileLat": "EPUB файлы (Латын)",
+        "authors": "Авторлар",
+        "categories": "Категориялар"
+      }
     }
   },
   "navigation": {
