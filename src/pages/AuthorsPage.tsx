@@ -18,24 +18,22 @@ export default function AuthorsPage() {
   const { data: authorsData, isLoading } = useGetAuthors();
   const authors = getAuthorsArray(authorsData);
   const deleteAuthor = useDeleteAuthor();
+  const formatToTruncate = (text: string, length: number = 50): string => {
+    return text.length > length ? `${text.substring(0, length)}...` : text;
+  };
 
   const columns = [
     {
       header: t('pages.authors.fields.nameCyrillic'),
       accessorKey: 'name_cyr',
     },
-    {
-      header: t('pages.authors.fields.nameLatin'),
-      accessorKey: 'name_lat',
-    },
+    
     {
       header: t('pages.authors.fields.biographyCyrillic'),
-      accessorKey: 'biography_cyr',
+
+      accessorKey: (row: Author) => formatToTruncate(row.biography_cyr, 20),
     },
-    {
-      header: t('pages.authors.fields.biographyLatin'),
-      accessorKey: 'biography_lat',
-    },
+    
     {
       header: t('pages.authors.fields.dateOfBirth'),
       accessorKey: 'date_of_birth',

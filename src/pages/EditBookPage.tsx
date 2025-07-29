@@ -4,6 +4,7 @@ import { ResourceForm } from '../core/helpers/ResourceForm';
 import { useGetCategories } from '../core/api/categories';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+// import { set } from 'react-hook-form';
 
 // Form-specific type that matches the form structure
 interface FormBook extends Omit<Book, 'categories'> {
@@ -17,7 +18,7 @@ export default function EditBookPage() {
   const updateBook = useUpdateBook();
   const { data: booksData } = useGetBooks();
   const { data: categoriesData } = useGetCategories();
-  
+  const [is_active, setis_active] = useState(false);
   const books = Array.isArray(booksData) ? booksData : booksData?.results || [];
   const categories = Array.isArray(categoriesData) ? categoriesData : categoriesData?.results || [];
   const [book, setBook] = useState<FormBook | null>(null);
@@ -30,6 +31,7 @@ export default function EditBookPage() {
         categories: currentBook.categories.map(cat => cat.id)
       };
       setBook(bookForForm);
+      setis_active(Boolean(currentBook.is_active));
     }
   }, [books, id]);
 
@@ -67,12 +69,13 @@ export default function EditBookPage() {
     {
       name: 'is_active',
       label: t('pages.books.fields.status'),
-      type: 'select' as const,
+      type: 'select',
       options: [
-        { value: true, label: t('common.active') },
-        { value: false, label: t('common.inactive') }
+        { value: 'true', label: t('common.active') },
+        { value: 'false', label: t('common.inactive') }
       ],
       required: true,
+      defaultValue: is_active ? 'true' : 'false',
     },
     {
       name: 'order',
@@ -123,9 +126,12 @@ export default function EditBookPage() {
     // Add all text and number fields to FormData
     Object.keys(data).forEach(key => {
       if (data[key] && !['cover_image', 'epub_file_cyr', 'epub_file_lat'].includes(key)) {
-        // Convert boolean and arrays to strings
-        if (typeof data[key] === 'boolean' || Array.isArray(data[key])) {
-          formData.append(key, JSON.stringify(data[key]));
+        if (key === 'categories') {
+          // For categories, send the first selected category ID
+          formData.append(key, data[key][0]);
+        } else if (key === 'is_active') {
+          // Convert string 'true'/'false' to boolean string
+          formData.append(key, String(data[key] === 'true'));
         } else {
           formData.append(key, data[key]);
         }
@@ -142,6 +148,7 @@ export default function EditBookPage() {
     if (data.epub_file_lat instanceof File) {
       formData.append('epub_file_lat', data.epub_file_lat);
     }
+
 
     try {
       await updateBook.mutateAsync({ 

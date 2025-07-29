@@ -43,6 +43,12 @@ export default function CreateBookPage() {
       required: true,
     },
     {
+      name: 'publisher',
+      label: t('pages.books.fields.publisher'),
+      type: 'text' as const,
+      required: true,
+    },
+    {
       name: 'is_active',
       label: t('pages.books.fields.status'),
       type: 'select' as const,

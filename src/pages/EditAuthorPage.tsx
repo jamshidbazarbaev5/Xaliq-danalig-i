@@ -61,6 +61,8 @@ export default function EditAuthorPage() {
       label: t('pages.authors.fields.photo'),
       type: 'file' as const,
       accept: 'image/*',
+      existingImage: author?.photo,
+      required: false,
     },
   ];
 
