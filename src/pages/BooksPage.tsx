@@ -18,7 +18,9 @@ export default function BooksPage() {
   const { data: booksData, isLoading } = useGetBooks();
   const books = getBooksArray(booksData);
   const deleteBook = useDeleteBook();
-
+  const formatToTruncate = (text: string, length: number = 50): string => {
+    return text.length > length ? `${text.substring(0, length)}...` : text;
+  };
   const columns = [
     {
       header: t('pages.books.fields.titleCyrillic'),
@@ -27,7 +29,7 @@ export default function BooksPage() {
     
     {
       header: t('pages.books.fields.descriptionCyrillic'),
-      accessorKey: 'description_cyr',
+      accessorKey: (row: Book) => formatToTruncate(row.description_cyr, 20),
     },
    
     {
