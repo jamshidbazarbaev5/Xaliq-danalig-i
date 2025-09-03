@@ -25,7 +25,6 @@ import EditDeveloperPage from "./pages/EditDeveloperPage";
 import EditBookPage from "./pages/EditFolklorsPage";
 import EditBooksPage from "./pages/EditBooksPage";
 import FolklorsPage from "./pages/FolklorsPage";
-import MultiSelectTestPage from "./pages/MultiSelectTestPage";
 
 const queryClient = new QueryClient();
 
@@ -91,10 +90,8 @@ function App() {
                         path="/books/edit/:id"
                         element={<EditBooksPage />}
                       />
-                      <Route
-                        path="/multiselect-test"
-                        element={<MultiSelectTestPage />}
-                      />
+                      
+                    
                       <Route path="/" element={<Navigate to="/categories" />} />
                     </Routes>
                   </Layout>

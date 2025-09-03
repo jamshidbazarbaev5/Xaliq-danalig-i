@@ -31,21 +31,24 @@ export function MultiSelectFinal({
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: Event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setSearchTerm("");
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('touchstart', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -63,13 +66,18 @@ export function MultiSelectFinal({
       if (disabled) return;
 
       const newSelected = selected.includes(value)
-        ? selected.filter(item => item !== value)
+        ? selected.filter((item) => item !== value)
         : [...selected, value];
 
       onChange(newSelected);
-      console.log('MultiSelect option toggled:', value, 'New selection:', newSelected);
+      console.log(
+        "MultiSelect option toggled:",
+        value,
+        "New selection:",
+        newSelected,
+      );
     },
-    [selected, onChange, disabled]
+    [selected, onChange, disabled],
   );
 
   const handleRemoveOption = React.useCallback(
@@ -78,40 +86,45 @@ export function MultiSelectFinal({
       event.stopPropagation();
       if (disabled) return;
 
-      const newSelected = selected.filter(item => item !== value);
+      const newSelected = selected.filter((item) => item !== value);
       onChange(newSelected);
-      console.log('MultiSelect option removed:', value, 'New selection:', newSelected);
+      console.log(
+        "MultiSelect option removed:",
+        value,
+        "New selection:",
+        newSelected,
+      );
     },
-    [selected, onChange, disabled]
+    [selected, onChange, disabled],
   );
 
   const toggleDropdown = React.useCallback(() => {
     if (disabled) return;
 
-    console.log('MultiSelect dropdown toggled, was open:', isOpen);
+    console.log("MultiSelect dropdown toggled, was open:", isOpen);
     setIsOpen(!isOpen);
     setSearchTerm("");
   }, [isOpen, disabled]);
 
   const getSelectedLabels = React.useCallback(() => {
-    return selected.map(value => {
-      const option = options.find(opt => opt.value === value);
+    return selected.map((value) => {
+      const option = options.find((opt) => opt.value === value);
       return { value, label: option ? option.label : String(value) };
     });
   }, [selected, options]);
 
   const filteredOptions = React.useMemo(() => {
     if (!searchTerm) return options;
-    return options.filter(option =>
-      option.label.toLowerCase().includes(searchTerm.toLowerCase())
+    return options.filter((option) =>
+      option.label.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   }, [options, searchTerm]);
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       setIsOpen(false);
       setSearchTerm("");
-    } else if (event.key === 'Enter') {
+    } else if (event.key === "Enter") {
       event.preventDefault();
       if (!isOpen) {
         toggleDropdown();
@@ -131,7 +144,7 @@ export function MultiSelectFinal({
         tabIndex={disabled ? -1 : 0}
         onClick={toggleDropdown}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             toggleDropdown();
           }
@@ -142,7 +155,7 @@ export function MultiSelectFinal({
           "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
           "flex items-center justify-between gap-2",
           disabled && "opacity-50 cursor-not-allowed bg-muted",
-          isOpen && "ring-2 ring-ring border-transparent"
+          isOpen && "ring-2 ring-ring border-transparent",
         )}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
@@ -156,7 +169,7 @@ export function MultiSelectFinal({
                 className={cn(
                   "inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md",
                   "bg-secondary text-secondary-foreground",
-                  "border border-secondary/20"
+                  "border border-secondary/20",
                 )}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -167,7 +180,7 @@ export function MultiSelectFinal({
                     onClick={(e) => handleRemoveOption(value, e)}
                     className={cn(
                       "flex-shrink-0 ml-1 rounded-sm opacity-70 hover:opacity-100",
-                      "hover:bg-secondary-foreground/20 focus:outline-none focus:ring-1 focus:ring-ring"
+                      "hover:bg-secondary-foreground/20 focus:outline-none focus:ring-1 focus:ring-ring",
                     )}
                     aria-label={`Remove ${label}`}
                   >
@@ -177,13 +190,15 @@ export function MultiSelectFinal({
               </span>
             ))
           ) : (
-            <span className="text-muted-foreground truncate text-sm">{placeholder}</span>
+            <span className="text-muted-foreground truncate text-sm">
+              {placeholder}
+            </span>
           )}
         </div>
         <ChevronDown
           className={cn(
             "h-4 w-4 opacity-50 transition-transform flex-shrink-0",
-            isOpen && "rotate-180"
+            isOpen && "rotate-180",
           )}
         />
       </div>
@@ -194,12 +209,12 @@ export function MultiSelectFinal({
           className={cn(
             "absolute top-full left-0 right-0 z-[9999] mt-1",
             "bg-popover border border-border rounded-md shadow-md",
-            "max-h-[300px] overflow-hidden"
+            "max-h-[300px] overflow-hidden",
           )}
           style={{
-            position: 'absolute',
+            position: "absolute",
             zIndex: 9999,
-            pointerEvents: 'auto'
+            pointerEvents: "auto",
           }}
         >
           {/* Search Input */}
@@ -212,7 +227,7 @@ export function MultiSelectFinal({
               onChange={(e) => setSearchTerm(e.target.value)}
               className={cn(
                 "w-full px-3 py-2 text-sm bg-background border border-border rounded-sm",
-                "placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                "placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring",
               )}
               onClick={(e) => e.stopPropagation()}
             />
@@ -222,7 +237,7 @@ export function MultiSelectFinal({
           <div className="max-h-[200px] overflow-y-auto p-1">
             {filteredOptions.length === 0 ? (
               <div className="px-3 py-2 text-sm text-muted-foreground text-center">
-                {searchTerm ? 'No options found' : 'No options available'}
+                {searchTerm ? "No options found" : "No options available"}
               </div>
             ) : (
               filteredOptions.map((option) => {
@@ -242,11 +257,12 @@ export function MultiSelectFinal({
                       "hover:bg-accent hover:text-accent-foreground",
                       "focus:bg-accent focus:text-accent-foreground focus:outline-none",
                       "flex items-center gap-2 transition-colors",
-                      isSelected && "bg-accent/50 text-accent-foreground font-medium"
+                      isSelected &&
+                        "bg-accent/50 text-accent-foreground font-medium",
                     )}
                     tabIndex={0}
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
+                      if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         handleToggleOption(option.value);
                       }

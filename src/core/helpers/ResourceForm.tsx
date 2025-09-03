@@ -17,8 +17,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
-import { MultiSelect } from "../../components/ui/multi-select";
-import { MultiSelectSimple } from "../../components/ui/multi-select-simple";
 import { MultiSelectFinal } from "../../components/ui/multi-select-final";
 import { PlusCircle } from "lucide-react";
 import { t } from "i18next";
