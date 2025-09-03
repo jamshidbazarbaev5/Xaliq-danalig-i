@@ -40,22 +40,7 @@ export default function FolklorsPage() {
       header: t("pages.books.fields.publisher"),
       accessorKey: "publisher",
     },
-    {
-      header: t("pages.books.fields.categories"),
-      accessorKey: "categories",
-      cell: (row: Book) => (
-        <div className="flex flex-wrap gap-1">
-          {row.categories?.map((category) => (
-            <span
-              key={category.id}
-              className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
-            >
-              {category.name_cyr}
-            </span>
-          )) || []}
-        </div>
-      ),
-    },
+    
     {
       header: t("pages.books.fields.authors"),
       accessorKey: "authors",

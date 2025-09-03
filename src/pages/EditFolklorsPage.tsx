@@ -5,8 +5,7 @@ import {
   type Book,
 } from "../core/api/folklore";
 import { ResourceForm } from "../core/helpers/ResourceForm";
-import { useGetCategories } from "../core/api/categories";
-import { useGetAuthors } from "../core/api/authors";
+
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 // import { set } from 'react-hook-form';
@@ -23,16 +22,10 @@ export default function EditFolklorPage() {
   const { t } = useTranslation();
   const updateBook = useUpdateFolklor();
   const { data: booksData } = useGetFolklors();
-  const { data: categoriesData } = useGetCategories();
-  const { data: authorsData } = useGetAuthors();
   const [is_active, setis_active] = useState(false);
   const books = Array.isArray(booksData) ? booksData : booksData?.results || [];
-  const categories = Array.isArray(categoriesData)
-    ? categoriesData
-    : categoriesData?.results || [];
-  const authors = Array.isArray(authorsData)
-    ? authorsData
-    : authorsData?.results || [];
+  
+  
   const [book, setBook] = useState<FormBook | null>(null);
 
   useEffect(() => {
@@ -40,7 +33,7 @@ export default function EditFolklorPage() {
     if (currentBook) {
       const bookForForm: FormBook = {
         ...currentBook,
-        categories: currentBook.categories.map((cat) => cat.id),
+        categories: currentBook.categories?.map((cat) => cat.id) || [],
         authors: currentBook.authors?.map((author) => author.id) || [],
       };
       setBook(bookForForm);
@@ -126,26 +119,8 @@ export default function EditFolklorPage() {
           : undefined,
       existingFileName: "Current Latin EPUB",
     },
-    {
-      name: "categories",
-      label: t("pages.books.fields.categories"),
-      type: "multiselect" as const,
-      options: categories.map((cat) => ({
-        value: cat.id as number,
-        label: cat.name_cyr,
-      })),
-      required: true,
-    },
-    {
-      name: "authors",
-      label: t("pages.books.fields.authors"),
-      type: "multiselect" as const,
-      options: authors.map((author) => ({
-        value: author.id as number,
-        label: author.name_cyr,
-      })),
-      required: true,
-    },
+   
+    
   ];
 
   const handleSubmit = async (data: Record<string, any>) => {

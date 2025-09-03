@@ -1,23 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useCreateFolklor } from "../core/api/folklore";
 import { ResourceForm } from "../core/helpers/ResourceForm";
-import { useGetCategories } from "../core/api/categories";
-import { useGetAuthors } from "../core/api/authors";
 import { useTranslation } from "react-i18next";
 
 export default function CreateFolklorPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const createBook = useCreateFolklor();
-  const { data: categoriesData } = useGetCategories();
-  const { data: authorsData } = useGetAuthors();
-  const categories = Array.isArray(categoriesData)
-    ? categoriesData
-    : categoriesData?.results || [];
-  const authors = Array.isArray(authorsData)
-    ? authorsData
-    : authorsData?.results || [];
 
+  
   const formFields = [
     {
       name: "title_cyr",
@@ -75,43 +66,22 @@ export default function CreateFolklorPage() {
       name: "cover_image",
       label: t("pages.books.fields.coverImage"),
       type: "file" as const,
-      required: true,
-      accept: "image/*",
+       accept: "image/*",
     },
     {
       name: "epub_file_cyr",
       label: t("pages.books.fields.epubFileCyrillic"),
       type: "file" as const,
-      required: true,
       accept: ".epub",
     },
     {
       name: "epub_file_lat",
       label: t("pages.books.fields.epubFileLatin"),
       type: "file" as const,
-      required: true,
       accept: ".epub",
     },
-    {
-      name: "categories",
-      label: t("pages.books.fields.categories"),
-      type: "multiselect" as const,
-      options: categories.map((cat) => ({
-        value: cat.id as number,
-        label: cat.name_cyr,
-      })),
-      required: true,
-    },
-    {
-      name: "authors",
-      label: t("pages.books.fields.authors"),
-      type: "multiselect" as const,
-      options: authors.map((author) => ({
-        value: author.id as number,
-        label: author.name_cyr,
-      })),
-      required: true,
-    },
+   
+  
   ];
 
   const handleSubmit = async (data: Record<string, unknown>) => {
