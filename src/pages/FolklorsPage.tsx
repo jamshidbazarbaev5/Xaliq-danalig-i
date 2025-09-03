@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useGetBooks, useDeleteBook, type Book } from "../core/api/books";
+import {
+  useGetFolklors,
+  useDeleteFolkor,
+  type Book,
+} from "../core/api/folklore";
 import { ResourceTable } from "@/core/helpers/ResourceTable";
 import { Button } from "../components/ui/button";
 import { useTranslation } from "react-i18next";
@@ -12,12 +16,12 @@ function getBooksArray<T>(data: ApiResponse<T> | undefined): T[] {
   return data.results;
 }
 
-export default function BooksPage() {
+export default function FolklorsPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { data: booksData, isLoading } = useGetBooks();
+  const { data: booksData, isLoading } = useGetFolklors();
   const books = getBooksArray(booksData);
-  const deleteBook = useDeleteBook();
+  const deleteBook = useDeleteFolkor();
   const formatToTruncate = (text: string, length: number = 50): string => {
     return text.length > length ? `${text.substring(0, length)}...` : text;
   };
@@ -64,7 +68,7 @@ export default function BooksPage() {
             >
               {author.name_cyr}
             </span>
-          ))}
+          )) || []}
         </div>
       ),
     },
@@ -87,7 +91,7 @@ export default function BooksPage() {
   ];
 
   const handleEdit = (book: Book) => {
-    navigate(`/books/edit/${book.id}`);
+    navigate(`/folklors/edit/${book.id}`);
   };
 
   const handleDelete = async (id: number) => {
@@ -106,7 +110,7 @@ export default function BooksPage() {
     <div className="container mx-auto py-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">{t("pages.books.title")}</h1>
-        <Button onClick={() => navigate("/books/create")}>
+        <Button onClick={() => navigate("/folklors/create")}>
           {t("pages.books.addButton")}
         </Button>
       </div>

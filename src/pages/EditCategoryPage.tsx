@@ -1,22 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetCategories, useUpdateCategory, type Category } from '../core/api/categories';
+import { useGetCategory, useGetCategories, useUpdateCategory, type Category } from '../core/api/categories';
 import { ResourceForm } from '../core/helpers/ResourceForm';
-import { useEffect, useState } from 'react';
 
 export default function EditCategoryPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const updateCategory = useUpdateCategory();
+  const { data: category, isLoading } = useGetCategory(Number(id)); // Add this line
   const { data: categoriesData } = useGetCategories();
   const categories = Array.isArray(categoriesData) ? categoriesData : categoriesData?.results || [];
-  const [category, setCategory] = useState<Category | null>(null);
-
-  useEffect(() => {
-    const currentCategory = categories.find((cat: Category) => cat.id === Number(id));
-    if (currentCategory) {
-      setCategory(currentCategory);
-    }
-  }, [categories, id]);
 
   const formFields = [
     {
@@ -69,7 +61,7 @@ export default function EditCategoryPage() {
     }
   };
 
-  if (!category) {
+  if (isLoading || !category) {
     return <div>Loading...</div>;
   }
 

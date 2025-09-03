@@ -25,13 +25,13 @@ export interface Book {
   }[];
 }
 
-const BOOKS_URL = "books/";
+const FOLKLOR_URL = "folklore/";
 
 // Create books API hooks using the factory function
 export const {
-  useGetResources: useGetBooks,
-  useGetResource: useGetBook,
-  useCreateResource: useCreateBook,
-  useUpdateResource: useUpdateBook,
-  useDeleteResource: useDeleteBook,
-} = createResourceApiHooks<Book>(BOOKS_URL, "books");
+  useGetResources: useGetFolklors,
+  useGetResource: useGetFolklor,
+  useCreateResource: useCreateFolklor,
+  useUpdateResource: useUpdateFolklor,
+  useDeleteResource: useDeleteFolkor,
+} = createResourceApiHooks<Book>(FOLKLOR_URL, "folklor");

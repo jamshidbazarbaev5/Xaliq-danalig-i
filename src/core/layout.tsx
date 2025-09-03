@@ -59,7 +59,8 @@ export default function Layout({ children }: any) {
         
         { icon: User2, label: t('navigation.authors'), href: '/authors' },
         { icon: UserCheck, label: t('navigation.developers'), href: '/developers' },
-          { icon: Book, label: t('navigation.books'), href: '/books' },
+          { icon: Book, label: t('navigation.folklors'), href: '/folklors' },
+           { icon: Book, label: t('navigation.books'), href: '/books' },
       ]
     },
   ];
